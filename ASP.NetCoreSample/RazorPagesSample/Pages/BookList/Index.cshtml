@@ -1,0 +1,71 @@
+﻿@page
+@model RazorPagesSample.Pages.BookList.IndexModel
+@{
+}
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-8">
+        <h2 class="text-info">Book List</h2>
+    </div>
+    <div class="col-4">
+        @*<a class="btn-info form-control text-white">Create New Book</a>*@
+        <a asp-page="Create" class="btn-info form-control text-white">Create New Book</a>
+    </div>
+
+    <div class="col-12 row p-3 mt-3">
+        <form method="post">
+            @if (Model.Books.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().BookName"></label>
+                        </th>
+                        <th>
+                            @*@Html.DisplayFor(m=>m.Books.FirstOrDefault().Author)*@
+                            <label asp-for="Books.FirstOrDefault().Author"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Books.FirstOrDefault().Volum"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Books)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.BookName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m=>item.Volum)
+                    </td>
+                    <td>
+                        <button class="btn-danger btn-sm">Delete</button>
+                        @*<a class="btn-success btn-sm">Edit</a>*@
+                        <a asp-page="Edit" asp-route-BookId="@item.BookId" class="btn-success btn-sm">Edit</a>
+                        @*<a asp-page="Create" class="btn-info form-control text-white">Create New Book</a>*@
+                        
+                    </td>
+                </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>There are no books available</p>
+            }
+        </form>
+    </div>
+
+
+
+    <!--<div class="col-3">-->
+    @*<h4 class="text-capitalize">Hello all</h4>*@
+    <!--<h4 class="text-info">Hello all</h4>
+
+    </div>-->
+
+</div>
